@@ -1,9 +1,11 @@
 import { render, screen } from "@testing-library/react"
-import Auth from "./Auth"
+import { Provider } from "react-redux";
+import Auth from "./Auth";
+import {store} from '../store/index';
 
 describe('auth page',() => {
     test('render sign up header on load', () => {
-        render(<Auth/>);
+        render(<Provider store={store}><Auth/></Provider>);
 
         const signuptitleElement = screen.getByRole('heading');
         expect(signuptitleElement).toBeInTheDocument();

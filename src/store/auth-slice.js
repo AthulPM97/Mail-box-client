@@ -56,6 +56,40 @@ export const signup = (credentials) => {
   };
 };
 
+export const signin = (credentials) => {
+  return async (dispatch) => {
+    const sendRequest = async () => {
+      const response = await fetch(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCkeLsAZA4tK5BDuupyIZHPIL8Nkxcs-6c",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: credentials.email,
+            password: credentials.password,
+            returnSecureToken: true,
+          }),
+          headers: {
+            "Content-Type": "application/JSON",
+          },
+        }
+      );
+      if (!response.ok) {
+        alert("Login failed. Please try again.");
+      } else {
+        const data = await response.json();
+        dispatch(authActions.login({ token: data.idToken, uid: data.localId }));
+        console.log("user has logged in successfully")
+      }
+    };
+
+    try {
+      await sendRequest();
+    } catch (error) {
+      alert("Error signing up: " + error.message);
+    }
+  };
+};
+
 export const authActions = authSlice.actions;
 
 export default authSlice.reducer;

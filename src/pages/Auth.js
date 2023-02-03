@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, NavLink, Row, Col } from "react-bootstrap";
+import SigninForm from "../components/Auth/SigninForm";
 import SignupForm from "../components/Auth/SignupForm";
 
 const Auth = () => {
+  //states
+  const [isLogin, setIsLogin] = useState(false);
+
+  //handlers
+  const authModeHandler = () => {
+    setIsLogin((mode) => !mode);
+  };
+
   return (
     <Container
       className="d-flex align-items-center justify-content-center"
@@ -10,14 +19,21 @@ const Auth = () => {
     >
       <Row>
         <Col md={12} className="p-3 bg-light rounded mx-auto">
-          <div className="text-center mb-3">
-            <h3>Sign Up</h3>
-          </div>
-          <SignupForm />
+          {!isLogin && <SignupForm />}
+          {isLogin && <SigninForm />}
         </Col>
         <Container className="border rounded mt-2">
           <div className="text-center m-1 ">
-            <NavLink>Already have an account? Login</NavLink>
+            {!isLogin && (
+              <NavLink onClick={authModeHandler}>
+                Already have an account? Login
+              </NavLink>
+            )}
+            {isLogin && (
+              <NavLink onClick={authModeHandler}>
+                Don't have an account? Sign up
+              </NavLink>
+            )}
           </div>
         </Container>
       </Row>

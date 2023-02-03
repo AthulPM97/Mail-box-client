@@ -1,42 +1,39 @@
 import { useRef } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { signup } from "../../store/auth-slice";
+import { signin } from "../../store/auth-slice";
 import { validate } from "./validate";
 
-const SignupForm = () => {
-  //refs
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const confirmPasswordRef = useRef();
-
+const SigninForm = () => {
   //store
   const dispatch = useDispatch();
 
+  //refs
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
   //handlers
-  const signupHandler = (event) => {
+  const loginHandler = (event) => {
     event.preventDefault();
     const enteredEmail = emailRef.current.value;
     const enteredPassword = passwordRef.current.value;
-    const enteredConfirmPassword = confirmPasswordRef.current.value;
 
     //validation
     const credentials = {
       email: enteredEmail,
       password: enteredPassword,
-      confirmPassword: enteredConfirmPassword,
     };
     if (validate(credentials)) {
-      dispatch(signup(credentials));
+      dispatch(signin(credentials));
     }
   };
 
   return (
     <Container>
       <div className="text-center mb-3">
-        <h3>Sign Up</h3>
+        <h3>Login</h3>
       </div>
-      <Form onSubmit={signupHandler}>
+      <Form onSubmit={loginHandler}>
         <Form.Group className="mb-2">
           <Form.Control
             type="email"
@@ -53,17 +50,9 @@ const SignupForm = () => {
             required
           />
         </Form.Group>
-        <Form.Group className="mb-2">
-          <Form.Control
-            type="password"
-            placeholder="Confirm password"
-            ref={confirmPasswordRef}
-            required
-          />
-        </Form.Group>
         <div className="text-center">
           <Button variant="primary" type="submit">
-            Sign Up
+            Login
           </Button>
         </div>
       </Form>
@@ -71,4 +60,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default SigninForm;
