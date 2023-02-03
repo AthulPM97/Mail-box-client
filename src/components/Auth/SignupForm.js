@@ -1,10 +1,14 @@
 import { useRef } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { signup } from "../../store/auth-slice";
 import { validate } from "./validate";
 
 const SignupForm = () => {
+  //history
+  const history = useHistory();
+
   //refs
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -28,6 +32,7 @@ const SignupForm = () => {
     };
     if (validate(credentials)) {
       dispatch(signup(credentials));
+      history.push("/home");
     }
   };
 

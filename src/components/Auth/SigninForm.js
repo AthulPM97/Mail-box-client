@@ -1,10 +1,14 @@
 import { useRef } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { signin } from "../../store/auth-slice";
 import { validate } from "./validate";
 
 const SigninForm = () => {
+  //history
+  const history = useHistory();
+
   //store
   const dispatch = useDispatch();
 
@@ -25,6 +29,7 @@ const SigninForm = () => {
     };
     if (validate(credentials)) {
       dispatch(signin(credentials));
+      history.push("/home");
     }
   };
 
