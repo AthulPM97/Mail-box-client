@@ -11,7 +11,7 @@ const SignupForm = () => {
   const confirmPasswordRef = useRef();
 
   //store
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   //handlers
   const signupHandler = (event) => {
@@ -25,9 +25,9 @@ const SignupForm = () => {
       email: enteredEmail,
       password: enteredPassword,
       confirmPassword: enteredConfirmPassword,
-    }
-    if(validate(credentials)) {
-      dispatch(signup(credentials));
+    };
+    if (validate(credentials)) {
+      //dispatch(signup(credentials));
     }
   };
 
