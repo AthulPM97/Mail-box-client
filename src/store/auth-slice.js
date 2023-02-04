@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+//load saved token
 const token = localStorage.getItem('token') || '';
 
 const initialAuthState = {
   isloggedIn: !!token,
   token: token || "",
-  uid: localStorage.getItem("userId") || "",
+  email: localStorage.getItem("email") || "",
 };
 
 const authSlice = createSlice({
@@ -14,13 +15,13 @@ const authSlice = createSlice({
   reducers: {
     login(state, action) {
       localStorage.setItem("token", action.payload.token);
-      localStorage.setItem("userId", action.payload.uid);
+      localStorage.setItem("email", action.payload.email);
       state.token = action.payload.token;
       state.uid = action.payload.uid;
     },
     logout(state) {
       localStorage.removeItem("token");
-      localStorage.removeItem("userId");
+      localStorage.removeItem("email");
     },
   },
 });
@@ -46,7 +47,7 @@ export const signup = (credentials) => {
         alert("Sign up failed. Please try again.");
       } else {
         const data = await response.json();
-        dispatch(authActions.login({ token: data.idToken, uid: data.localId }));
+        dispatch(authActions.login({ token: data.idToken, uid: data.email }));
         console.log("user has signed up successfully")
       }
     };
@@ -80,7 +81,7 @@ export const signin = (credentials) => {
         alert("Login failed. Please try again.");
       } else {
         const data = await response.json();
-        dispatch(authActions.login({ token: data.idToken, uid: data.localId }));
+        dispatch(authActions.login({ token: data.idToken, email: data.email }));
         console.log("user has logged in successfully")
       }
     };
