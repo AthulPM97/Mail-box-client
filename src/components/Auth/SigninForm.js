@@ -10,7 +10,7 @@ const SigninForm = () => {
   const history = useHistory();
 
   //store
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   //refs
   const emailRef = useRef();
@@ -28,7 +28,7 @@ const SigninForm = () => {
       password: enteredPassword,
     };
     if (validate(credentials)) {
-      dispatch(signin(credentials));
+      //dispatch(signin(credentials));
       history.push("/home");
     }
   };
