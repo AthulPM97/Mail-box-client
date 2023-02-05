@@ -2,8 +2,13 @@ import { useRef, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { useDispatch } from "react-redux";
+import { sendMail } from "../../store/mail-slice";
 
 const MailDrafter = () => {
+  //store
+  const dispatch = useDispatch();
+
   //state
   const [editorState, setEditorState] = useState(null);
 
@@ -14,7 +19,6 @@ const MailDrafter = () => {
   //handlers
   const editorStateChangeHandler = (newEditorState) => {
     setEditorState(newEditorState);
-    console.log(editorState.getCurrentContent().getPlainText());
   };
   const sendMailHandler = (event) => {
     event.preventDefault();
@@ -22,6 +26,13 @@ const MailDrafter = () => {
     const enteredRecepient = recepientRef.current.value;
     const enteredSubject = subjectRef.current.value;
     const enteredMessage = editorState.getCurrentContent().getPlainText();
+
+    const draftedMail = {
+      recepient: enteredRecepient,
+      subject: enteredSubject,
+      message: enteredMessage,
+    };
+    dispatch(sendMail(draftedMail));
   };
 
   return (

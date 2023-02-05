@@ -9,8 +9,7 @@ function App() {
 
   //store
   const isloggedIn = useSelector(state => state.auth.isloggedIn);
-  console.log(isloggedIn);
-
+  
   return (
     <div>
       <Nav variant="dark" className="bg-dark">
