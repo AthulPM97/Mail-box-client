@@ -1,35 +1,41 @@
-import { Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { NavLink, Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Inbox from "./components/Inbox/Inbox";
 import MailDrafter from "./components/Mail/MailDrafter";
 import Auth from "./pages/Auth";
 import Home from "./pages/Home";
 
 function App() {
-
   //store
-  const isloggedIn = useSelector(state => state.auth.isloggedIn);
-  
+  const isloggedIn = useSelector((state) => state.auth.isloggedIn);
+
   return (
     <div>
-      <Nav variant="dark" className="bg-dark">
-        <NavLink to='/inbox'>Inbox</NavLink>
-      </Nav>
+      <Navbar bg="primary" variant="dark">
+        <Container>
+          <Navbar.Brand href="/home">Mailbox</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="/home">Home</Nav.Link>
+            <Nav.Link href="/inbox">Inbox</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+      <br />
       <Switch>
         <Route path="/" exact>
           {!isloggedIn && <Auth />}
-          {isloggedIn && <Redirect to='/home'/>}
+          {isloggedIn && <Redirect to="/home" />}
         </Route>
         <Route path="/home" exact>
-          {isloggedIn && <Home/>}
-          {!isloggedIn && <Redirect to='/'/>}
+          {isloggedIn && <Home />}
+          {!isloggedIn && <Redirect to="/" />}
         </Route>
         <Route path="/draft-mail" exact>
           {isloggedIn && <MailDrafter />}
         </Route>
         <Route path="/inbox" exact>
-          {isloggedIn && <Inbox/>}
+          {isloggedIn && <Inbox />}
         </Route>
       </Switch>
     </div>

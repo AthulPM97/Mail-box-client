@@ -1,4 +1,4 @@
-import { Container, ListGroup } from "react-bootstrap";
+import { Col, Container, ListGroup, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 const MailBox = () => {
@@ -8,11 +8,10 @@ const MailBox = () => {
 
   const mailItems = inbox.map((mail) => {
     return (
-      <ListGroup horizontal key={mail.id}>
-        <ListGroup.Item as="li">{mail.sender}</ListGroup.Item>
-        <ListGroup.Item>{mail.subject}</ListGroup.Item>
-        <ListGroup.Item>{mail.message}</ListGroup.Item>
-      </ListGroup>
+      <Row key={mail.id} className="border">
+        <Col md={4}>{mail.sender}</Col>
+        <Col md={8}>{mail.subject}</Col>
+      </Row>
     );
   });
 
