@@ -11,6 +11,9 @@ const mailSlice = createSlice({
     send(state, action) {
       state.outbox.push(action.payload);
     },
+    setInbox(state, action) {
+        state.inbox.push(action.payload);
+    }
   },
 });
 

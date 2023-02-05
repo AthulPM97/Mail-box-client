@@ -2,6 +2,7 @@ import { createSlice, createStore } from "@reduxjs/toolkit";
 import {
   fireEvent,
   getAllByRole,
+  getByPlaceholderText,
   getByRole,
   render,
   screen,
@@ -56,6 +57,11 @@ describe("mail drafter", () => {
     );
 
     //Act
+    const inputRecepient = screen.getByPlaceholderText(/recepient/i);
+    fireEvent.change(inputRecepient, { target: { value: 'test@gmail.com' } });
+    const inputSubject = screen.getByPlaceholderText(/subject/i);
+    fireEvent.change(inputSubject, {target: {value: 'test'}});
+
     const submitBtn = screen.getByRole("button");
     fireEvent.click(submitBtn);
 

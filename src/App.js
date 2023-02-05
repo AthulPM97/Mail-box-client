@@ -1,6 +1,7 @@
 import { Nav, Navbar } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { NavLink, Redirect, Route, Switch } from "react-router-dom";
+import Inbox from "./components/Inbox/Inbox";
 import MailDrafter from "./components/Mail/MailDrafter";
 import Auth from "./pages/Auth";
 import Home from "./pages/Home";
@@ -13,7 +14,7 @@ function App() {
   return (
     <div>
       <Nav variant="dark" className="bg-dark">
-        <NavLink to='/draft-mail'>Compose</NavLink>
+        <NavLink to='/inbox'>Inbox</NavLink>
       </Nav>
       <Switch>
         <Route path="/" exact>
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path="/draft-mail" exact>
           {isloggedIn && <MailDrafter />}
+        </Route>
+        <Route path="/inbox" exact>
+          {isloggedIn && <Inbox/>}
         </Route>
       </Switch>
     </div>

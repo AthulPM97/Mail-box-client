@@ -44,6 +44,7 @@ const MailDrafter = () => {
           <Editor
             editorState={editorState}
             onEditorStateChange={editorStateChangeHandler}
+            data-testid="message"
           />
         </Container>
         <Button variant="outline-primary" type="submit">
