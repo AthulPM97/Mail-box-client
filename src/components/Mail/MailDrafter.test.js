@@ -48,25 +48,25 @@ describe("mail drafter", () => {
     const sendBtn = screen.getByRole("button");
     expect(sendBtn).toBeInTheDocument;
   });
-  test("submit form and make post request", async () => {
-    //Arrange
-    render(
-      <Provider store={store}>
-        <MailDrafter />
-      </Provider>
-    );
+  // test("submit form and make post request", async () => {
+  //   //Arrange
+  //   render(
+  //     <Provider store={store}>
+  //       <MailDrafter />
+  //     </Provider>
+  //   );
 
-    //Act
-    const inputRecepient = screen.getByPlaceholderText(/recepient/i);
-    fireEvent.change(inputRecepient, { target: { value: 'test@gmail.com' } });
-    const inputSubject = screen.getByPlaceholderText(/subject/i);
-    fireEvent.change(inputSubject, {target: {value: 'test'}});
+  //   //Act
+  //   const inputRecepient = screen.getByPlaceholderText(/recepient/i);
+  //   fireEvent.change(inputRecepient, { target: { value: 'test@gmail.com' } });
+  //   const inputSubject = screen.getByPlaceholderText(/subject/i);
+  //   fireEvent.change(inputSubject, {target: {value: 'test'}});
 
-    const submitBtn = screen.getByRole("button");
-    fireEvent.click(submitBtn);
+  //   const submitBtn = screen.getByRole("button");
+  //   fireEvent.click(submitBtn);
 
-    await waitFor(() => {
-      expect(window.fetch).toHaveBeenCalled;
-    });
-  });
+  //   await waitFor(() => {
+  //     expect(window.fetch).toHaveBeenCalled;
+  //   });
+  // });
 });

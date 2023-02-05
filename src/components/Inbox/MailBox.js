@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 const MailBox = () => {
   //store
   const inbox = useSelector((state) => state.mail.inbox);
-  console.log(inbox);
 
   const mailItems = inbox.map((mail) => {
     return (
