@@ -44,6 +44,7 @@ const ViewMail = (props) => {
   const backClickHandler = () => {
     props.onBackClick();
   };
+
   return (
     <React.Fragment>
       <div className="border">

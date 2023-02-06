@@ -35,4 +35,12 @@ describe("Rendering the mailbox", () => {
     const badge = screen.getByRole("generic");
     expect(badge).toBeInTheDocument;
   });
+  test('renders the delete button', () => {
+    <Provider store={store}>
+        <MailBox />
+      </Provider>
+
+      const deleteButtons = screen.getAllByText('Delete');
+      expect(deleteButtons).not.toHaveLength(0);
+  });
 });

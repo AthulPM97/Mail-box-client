@@ -27,6 +27,7 @@ const MailDrafter = () => {
     const enteredSubject = subjectRef.current.value;
     const enteredMessage = editorState.getCurrentContent().getPlainText();
 
+
     const draftedMail = {
       recepient: enteredRecepient,
       subject: enteredSubject,
