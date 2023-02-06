@@ -40,10 +40,10 @@ const MailBox = (props) => {
     const read = mail.read === true ? true : false;
     return (
       <ListGroup as="li" key={mail.id}>
-        <Row className="border m-1 ">
+        <Row className="border m-1" style={{ cursor: "pointer" }}>
           <Col md={2}>{!read && <Badge>new</Badge>}</Col>
           <Col md={4} onClick={props.onMailClick.bind(null, mail)}>
-            {mail.sender}
+            <strong>{mail.sender}</strong>
           </Col>
           <Col md={4}>{mail.subject}</Col>
           <Col md={2}>

@@ -9,7 +9,7 @@ const SideMenu = () => {
 
   //unread mail count
   const unreadMailCount = inbox.reduce((count,mail) => {
-    if(mail.read === 'false') {
+    if(mail.read === 'false' || mail.read === false) {
       count++;
       return count;
     }
