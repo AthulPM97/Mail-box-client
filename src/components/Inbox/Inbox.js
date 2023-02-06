@@ -1,15 +1,20 @@
-import { useEffect } from "react";
-import { Button, Col, Container, Navbar, Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { mailActions } from "../../store/mail-slice";
 import MailBox from "./MailBox";
 import SideMenu from "./SideMenu";
 import TopBar from "./TopBar";
+import ViewMail from "./ViewMail";
 
 const Inbox = () => {
   //history
   const history = useHistory();
+
+  //states
+  const [viewingMode, setViewingMode] = useState(false);
+  const [viewedMail, setViewedMail] = useState(null);
 
   //store
   const dispatch = useDispatch();
@@ -28,9 +33,7 @@ const Inbox = () => {
         if (response.ok) {
           const data = await response.json();
           const keys = Object.keys(data);
-          console.log(keys);
           keys.forEach((key) => {
-            console.log(data[key]);
             const mailWithId = {
               ...data[key],
               id: key,
@@ -45,10 +48,15 @@ const Inbox = () => {
     getData();
   }, [dispatch]);
 
-  //handler
+  //handlers
   const composeMailHandler = () => {
     history.push('/draft-mail');
   };
+
+  const viewModeHandler = (mail) => {
+    setViewingMode(mode => !mode);
+    setViewedMail(mail);
+  }
 
   return (
     <Container className="m-1">
@@ -64,7 +72,8 @@ const Inbox = () => {
         <Col md={10}>
           <Container>
             <TopBar />
-            <MailBox />
+            {!viewingMode && <MailBox onMailClick={viewModeHandler} />}
+            {viewingMode && <ViewMail mail={viewedMail} onBackClick={viewModeHandler}/>}
           </Container>
         </Col>
       </Row>

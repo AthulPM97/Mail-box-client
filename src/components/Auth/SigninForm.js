@@ -29,7 +29,7 @@ const SigninForm = () => {
     };
     if (validate(credentials)) {
       dispatch(signin(credentials));
-      history.push("/home");
+      history.replace("/home");
     }
   };
 

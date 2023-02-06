@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-//const processedEmail = email.replace("@", "").replace(".", "")
 const mailSlice = createSlice({
   name: "mail",
   initialState: {
@@ -13,12 +12,17 @@ const mailSlice = createSlice({
     },
     setInbox(state, action) {
         state.inbox.push(action.payload);
-    }
+    },
+    updateReadReceipt(state,action) {
+      const existingMail = state.inbox.find((mail) => mail.id === action.payload);
+      existingMail.read = true;
+    },
   },
 });
 
 export const sendMail = (draftedMail) => {
   return async (dispatch) => {
+    //request to senders outbox
     const outbox = async () => {
       const processedEmail = localStorage
         .getItem("email")
@@ -46,6 +50,8 @@ export const sendMail = (draftedMail) => {
         console.log("message stored to DB");
       }
     };
+    
+    //request to receiver's inbox
     const recepientInbox = async () => {
       const processedEmail = draftedMail.recepient.replace("@", "").replace(".", "");
       const response = await fetch(
@@ -56,6 +62,7 @@ export const sendMail = (draftedMail) => {
             sender: localStorage.getItem('email'),
             subject: draftedMail.subject,
             message: draftedMail.message,
+            read: false,
           }),
           headers: {
             "Content-Type": "application/JSON",

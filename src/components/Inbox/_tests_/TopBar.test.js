@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import TopBar from "./TopBar"
+import TopBar from "../TopBar"
 
 describe('Top bar of the mailbox', () => {
     test('render delete button', () => {

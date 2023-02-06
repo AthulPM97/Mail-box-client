@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import SideMenu from "./SideMenu"
+import SideMenu from "../SideMenu"
 
 describe('side menu of mailbox', () => {
     test('renders a ul', () => {

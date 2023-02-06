@@ -18,10 +18,12 @@ const authSlice = createSlice({
       localStorage.setItem("email", action.payload.email);
       state.token = action.payload.token;
       state.uid = action.payload.uid;
+      state.isloggedIn = true;
     },
     logout(state) {
       localStorage.removeItem("token");
       localStorage.removeItem("email");
+      state.isloggedIn = false;
     },
   },
 });
