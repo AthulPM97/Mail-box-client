@@ -38,16 +38,25 @@ const MailDrafter = () => {
   return (
     <Container className="border">
       <Form onSubmit={sendMailHandler}>
-        <Form.Control type="text" ref={recepientRef} placeholder='Recepient email' />
-        <Form.Control type="text" ref={subjectRef} placeholder='Subject' />
-        <Container >
+        <Form.Control
+          type="text"
+          ref={recepientRef}
+          placeholder="Recepient email"
+          className="mt-2 mb-2"
+        />
+        <Form.Control
+          type="text"
+          ref={subjectRef}
+          placeholder="Subject"
+          className="mb-2"
+        />
+        <Container className="border mb-2" style={{ minHeight: 200 }}>
           <Editor
             editorState={editorState}
             onEditorStateChange={editorStateChangeHandler}
-            data-testid="message"
           />
         </Container>
-        <Button variant="outline-primary" type="submit">
+        <Button variant="outline-primary" type="submit" className="mb-2">
           Send
         </Button>
       </Form>
