@@ -4,9 +4,6 @@ const TopBar = () => {
   return (
     <Nav className="justify-content-center" activeKey="/inbox">
       <Nav.Item>
-        <Button variant="outline-danger">Delete</Button>
-      </Nav.Item>
-      <Nav.Item>
         <Button variant="outline-primary">Archive</Button>
       </Nav.Item>
       <Nav.Item>

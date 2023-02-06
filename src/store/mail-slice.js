@@ -17,6 +17,9 @@ const mailSlice = createSlice({
       const existingMail = state.inbox.find((mail) => mail.id === action.payload);
       existingMail.read = true;
     },
+    deleteMail(state,action) {
+      state.inbox = state.inbox.filter((mail) => mail.id !== action.payload);
+    },
   },
 });
 
