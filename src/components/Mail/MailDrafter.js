@@ -50,7 +50,7 @@ const MailDrafter = () => {
           placeholder="Subject"
           className="mb-2"
         />
-        <Container className="border mb-2" style={{ minHeight: 200 }}>
+        <Container className="border mb-2" style={{ minHeight: 300 }}>
           <Editor
             editorState={editorState}
             onEditorStateChange={editorStateChangeHandler}

@@ -25,4 +25,14 @@ describe("Rendering the mailbox", () => {
     const mailList = screen.getByRole("list");
     expect(mailList).toBeInTheDocument;
   });
+  test("renders the badge when read is false", () => {
+    render(
+      <Provider store={store}>
+        <MailBox />
+      </Provider>
+    );
+
+    const badge = screen.getByRole("generic");
+    expect(badge).toBeInTheDocument;
+  });
 });

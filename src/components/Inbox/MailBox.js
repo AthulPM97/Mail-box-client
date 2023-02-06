@@ -7,7 +7,7 @@ const MailBox = (props) => {
   const inbox = useSelector((state) => state.mail.inbox);
 
   const mailItems = inbox.map((mail) => {
-    const read = mail.read === true? true : false ;
+    const read = mail.read === true? true : false;
     return (
       <Link key={mail.id}>
         <Row

@@ -2,7 +2,7 @@ import React from "react";
 import { Badge, ListGroup, Nav } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
-const SideMenu = (props) => {
+const SideMenu = () => {
 
   //store 
   const inbox = useSelector(state => state.mail.inbox);
