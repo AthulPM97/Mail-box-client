@@ -15,6 +15,7 @@ const Inbox = () => {
   //states
   const [viewingMode, setViewingMode] = useState(false);
   const [viewedMail, setViewedMail] = useState(null);
+  const [count, setCount] = useState(0);
 
   //store
   const dispatch = useDispatch();
@@ -33,20 +34,27 @@ const Inbox = () => {
         if (response.ok) {
           const data = await response.json();
           const keys = Object.keys(data);
+          let inboxArray = [];
           keys.forEach((key) => {
             const mailWithId = {
               ...data[key],
               id: key,
             };
-            dispatch(mailActions.setInbox(mailWithId));
+            inboxArray.push(mailWithId);
           });
+          dispatch(mailActions.setInbox(inboxArray));
         }
       } catch (err) {
         console.log("error fetching data " + err.message);
       }
     };
-    getData();
-  }, [dispatch]);
+    const intervalId = setInterval(() => {
+      getData();
+      console.log('get data called');
+      setCount(count + 1);
+    },2000);
+    return () => clearInterval(intervalId);
+  }, [dispatch, count]);
 
   //handlers
   const composeMailHandler = () => {

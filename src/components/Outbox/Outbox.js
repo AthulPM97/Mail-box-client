@@ -33,13 +33,15 @@ const Outbox = () => {
         if (response.ok) {
           const data = await response.json();
           const keys = Object.keys(data);
+          let inboxArray = [];
           keys.forEach((key) => {
             const mailWithId = {
               ...data[key],
               id: key,
             };
-            dispatch(mailActions.setInbox(mailWithId));
+            inboxArray.push(mailWithId);
           });
+          dispatch(mailActions.setInbox(inboxArray));
         }
       } catch (err) {
         console.log("error fetching data " + err.message);
