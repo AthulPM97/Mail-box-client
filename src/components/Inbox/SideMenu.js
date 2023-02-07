@@ -24,6 +24,9 @@ const SideMenu = () => {
       <ListGroup.Item as="li">
         <Nav.Link>Unread<Badge>{unreadMailCount}</Badge></Nav.Link>
       </ListGroup.Item>
+      <ListGroup.Item as="li">
+        <Nav.Link href="/outbox">Outbox</Nav.Link>
+      </ListGroup.Item>
     </ListGroup>
   );
 };

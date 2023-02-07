@@ -11,14 +11,22 @@ const mailSlice = createSlice({
       state.outbox.push(action.payload);
     },
     setInbox(state, action) {
-        state.inbox.push(action.payload);
+      state.inbox.push(action.payload);
     },
-    updateReadReceipt(state,action) {
-      const existingMail = state.inbox.find((mail) => mail.id === action.payload);
+    setOutbox(state, action) {
+      state.outbox.push(action.payload);
+    },
+    updateReadReceipt(state, action) {
+      const existingMail = state.inbox.find(
+        (mail) => mail.id === action.payload
+      );
       existingMail.read = true;
     },
-    deleteMail(state,action) {
+    deleteMail(state, action) {
       state.inbox = state.inbox.filter((mail) => mail.id !== action.payload);
+    },
+    deleteOutboxMail(state, action) {
+      state.outbox = state.outbox.filter((mail) => mail.id !== action.payload);
     },
   },
 });
@@ -53,16 +61,18 @@ export const sendMail = (draftedMail) => {
         console.log("message stored to DB");
       }
     };
-    
+
     //request to receiver's inbox
     const recepientInbox = async () => {
-      const processedEmail = draftedMail.recepient.replace("@", "").replace(".", "");
+      const processedEmail = draftedMail.recepient
+        .replace("@", "")
+        .replace(".", "");
       const response = await fetch(
         `https://mail-box-client-bec77-default-rtdb.firebaseio.com/inbox/${processedEmail}.json`,
         {
           method: "POST",
           body: JSON.stringify({
-            sender: localStorage.getItem('email'),
+            sender: localStorage.getItem("email"),
             subject: draftedMail.subject,
             message: draftedMail.message,
             read: false,

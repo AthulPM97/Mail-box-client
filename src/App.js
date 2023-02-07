@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Inbox from "./components/Inbox/Inbox";
 import MailDrafter from "./components/Mail/MailDrafter";
+import Outbox from "./components/Outbox/Outbox";
 import Navigationbar from "./components/UI/Navigationbar";
 import Auth from "./pages/Auth";
 import Home from "./pages/Home";
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path="/inbox" exact>
           {isloggedIn && <Inbox />}
+        </Route>
+        <Route path="/outbox" exact>
+          {isloggedIn && <Outbox />}
         </Route>
       </Switch>
     </React.Fragment>
