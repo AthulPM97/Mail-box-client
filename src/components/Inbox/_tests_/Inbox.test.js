@@ -36,13 +36,13 @@ class LocalStorageMock {
   }
 
 describe('rendering the inbox component', () => {
-    // test('render compose button', () => {
-    //     render(<Provider store={store}><Inbox/></Provider>);
+    test('render compose button', () => {
+        render(<Provider store={store}><Inbox/></Provider>);
 
-    //     window.localStorage = new LocalStorageMock;
-    //     window.localStorage.setItem('email', 'athul@gmail.com');
+        window.localStorage = new LocalStorageMock;
+        window.localStorage.setItem('email', 'athul@gmail.com');
 
-    //     const composeBtn = screen.getByText('Compose');
-    //     expect(composeBtn).toBeInTheDocument;
-    // });
+        const composeBtn = screen.getByText('Compose');
+        expect(composeBtn).toBeInTheDocument;
+    });
 });
