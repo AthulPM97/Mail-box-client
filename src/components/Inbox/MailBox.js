@@ -1,8 +1,12 @@
 import { Badge, Button, Col, Container, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import useHttp from "../../hooks/use-http";
 import { mailActions } from "../../store/mail-slice";
 
 const MailBox = (props) => {
+  //custom hooks
+  const { error, sendRequest } = useHttp();
+
   //store
   const inbox = useSelector((state) => state.mail.inbox);
   const dispatch = useDispatch();
@@ -13,26 +17,18 @@ const MailBox = (props) => {
       .getItem("email")
       .replace("@", "")
       .replace(".", "");
-    const deleteMail = async () => {
-      try {
-        const response = await fetch(
-          `https://mail-box-client-bec77-default-rtdb.firebaseio.com/inbox/${processedEmail}/${mailItemId}.json`,
-          {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/JSON",
-            },
-          }
-        );
-        if (response.ok) {
-          dispatch(mailActions.deleteMail(mailItemId));
-          console.log("mail deleted");
-        }
-      } catch (err) {
-        console.log("Error deleting mail: " + err.message);
-      }
-    };
-    deleteMail();
+    sendRequest({
+      url: `https://mail-box-client-bec77-default-rtdb.firebaseio.com/inbox/${processedEmail}/${mailItemId}.json`,
+      method: "DELETE",
+    });
+
+    if (!error) {
+      dispatch(mailActions.deleteMail(mailItemId));
+      console.log("mail deleted");
+    }
+    if (error) {
+      console.log("Error deleting mail: " + error);
+    }
   };
 
   //inbox mail list
