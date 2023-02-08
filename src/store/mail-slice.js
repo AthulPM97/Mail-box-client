@@ -14,7 +14,7 @@ const mailSlice = createSlice({
       state.inbox = [...action.payload];
     },
     setOutbox(state, action) {
-      state.outbox.push(action.payload);
+      state.outbox = [...action.payload];
     },
     updateReadReceipt(state, action) {
       const existingMail = state.inbox.find(
