@@ -15,9 +15,7 @@ const authSlice = createSlice({
   reducers: {
     login(state, action) {
       localStorage.setItem("token", action.payload.token);
-      localStorage.setItem("email", action.payload.email);
       state.token = action.payload.token;
-      state.uid = action.payload.uid;
       state.isloggedIn = true;
     },
     logout(state) {
@@ -49,7 +47,7 @@ export const signup = (credentials) => {
         alert("Sign up failed. Please try again.");
       } else {
         const data = await response.json();
-        dispatch(authActions.login({ token: data.idToken, uid: data.email }));
+        dispatch(authActions.login({ token: data.idToken }));
         console.log("user has signed up successfully")
       }
     };
@@ -83,7 +81,7 @@ export const signin = (credentials) => {
         alert("Login failed. Please try again.");
       } else {
         const data = await response.json();
-        dispatch(authActions.login({ token: data.idToken, email: data.email }));
+        dispatch(authActions.login({ token: data.idToken }));
         console.log("user has logged in successfully")
       }
     };

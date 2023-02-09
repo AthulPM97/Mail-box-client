@@ -58,6 +58,7 @@ export const sendMail = (draftedMail) => {
       } else {
         const data = await response.json();
         dispatch(mailActions.send({ ...draftedMail, id: data.name }));
+        alert('Mail sent!');
         console.log("message stored to DB");
       }
     };

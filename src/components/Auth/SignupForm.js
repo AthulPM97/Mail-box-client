@@ -31,6 +31,7 @@ const SignupForm = () => {
       confirmPassword: enteredConfirmPassword,
     };
     if (validate(credentials)) {
+      localStorage.setItem('email', enteredEmail);
       dispatch(signup(credentials));
       history.push("/home");
     }

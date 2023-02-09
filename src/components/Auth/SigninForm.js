@@ -28,6 +28,7 @@ const SigninForm = () => {
       password: enteredPassword,
     };
     if (validate(credentials)) {
+      localStorage.setItem("email", enteredEmail);
       dispatch(signin(credentials));
       history.replace("/home");
     }
