@@ -3,11 +3,15 @@ import { Button, Container, Form } from "react-bootstrap";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { sendMail } from "../../store/mail-slice";
 
 const MailDrafter = () => {
   //store
   const dispatch = useDispatch();
+
+  //history
+  const history = useHistory();
 
   //state
   const [editorState, setEditorState] = useState(null);
@@ -33,6 +37,7 @@ const MailDrafter = () => {
       message: enteredMessage,
     };
     dispatch(sendMail(draftedMail));
+    history.push('/outbox');
   };
 
   return (
