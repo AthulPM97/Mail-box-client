@@ -4,7 +4,7 @@ import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { sendMail } from "../../store/mail-slice";
+import { sendMail } from "../../store/sendMailThunk";
 
 const MailDrafter = () => {
   //store
