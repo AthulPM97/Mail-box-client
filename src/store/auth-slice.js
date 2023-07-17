@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 //load saved token
-const token = localStorage.getItem('token') || '';
+const token = localStorage.getItem("token") || "";
 
 const initialAuthState = {
   isloggedIn: !!token,
@@ -48,7 +48,7 @@ export const signup = (credentials) => {
       } else {
         const data = await response.json();
         dispatch(authActions.login({ token: data.idToken }));
-        console.log("user has signed up successfully")
+        console.log("user has signed up successfully");
       }
     };
 
@@ -82,7 +82,7 @@ export const signin = (credentials) => {
       } else {
         const data = await response.json();
         dispatch(authActions.login({ token: data.idToken }));
-        console.log("user has logged in successfully")
+        console.log("user has logged in successfully");
       }
     };
 
